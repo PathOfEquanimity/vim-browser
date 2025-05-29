@@ -12,7 +12,7 @@ export function handle(event: KeyboardEvent, state: State): State {
     switch (event.key) {
       case "Backspace": {
         newState.text = deleteCharacter(state.text, state.location);
-        newState.location = Math.max(state.location - 1, 0);
+        newState.location = Math.max(state.location - 1, -1);
         break;
       }
       case "ESC": {

@@ -20,6 +20,7 @@ export interface Location {
 }
 
 export const textTo2D = (text: string, width: number): string[][] => {
+  if (text == "") return [[]];
   const text2d: string[][] = [];
   const textArray = Array.from(text);
   let currentLine = -1;
@@ -36,5 +37,5 @@ export const textTo2D = (text: string, width: number): string[][] => {
 export const locationTo2D = (location: number, width: number): Location => {
   const y = Math.floor(location / width);
   const x = location % width;
-  return { y: y, x: x };
+  return { y, x };
 };

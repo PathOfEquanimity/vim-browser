@@ -32,7 +32,11 @@ export default function Canvas() {
     location: -1,
     mode: Mode.INSERT,
   });
-  const [width, setWidth] = useState(Math.floor(window.innerWidth / TEXT_SIZE));
+  const [width, setWidth] = useState(0);
+
+  useEffect(() => {
+    setWidth(Math.floor(window.innerWidth / TEXT_SIZE));
+  }, []);
   // TODO: to be removed
   const toggleMode = () => {
     setState({
@@ -81,7 +85,7 @@ export default function Canvas() {
             localLocation = location2d.x;
           }
           return (
-            <div className="col-start-1 row-start-1">
+            <div key={i} className="col-start-1 row-start-1">
               {renderTextLine(textLine, localLocation, i)}
             </div>
           );
