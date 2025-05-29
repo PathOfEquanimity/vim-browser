@@ -24,6 +24,5 @@ export function handle(event: KeyboardEvent, state: State): State {
       }
     }
   }
-  console.log("Setting State", newState);
   return newState;
 }
