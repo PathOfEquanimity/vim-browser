@@ -9,7 +9,6 @@ import Paragraph from "@/components/Paragraph";
 export function createParagraphs(text: string, location: number) {
   let paragraphSize = -1;
   return text.split("\n").map((textLine: string, i: number) => {
-    console.log(paragraphSize, textLine.length, location);
     paragraphSize += 1;
     const lineSize = textLine.length;
     const currentActiveLine =

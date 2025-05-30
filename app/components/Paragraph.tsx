@@ -32,13 +32,15 @@ export default function Paragraph({
 }) {
   const [width, setWidth] = useState(0);
   const handleResize = () => {
-    console.log(Math.floor(window.innerWidth / TEXT_SIZE));
     setWidth(Math.floor(window.innerWidth / TEXT_SIZE));
   };
 
   useEffect(() => {
     setWidth(Math.floor(window.innerWidth / TEXT_SIZE));
     window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   return (
@@ -46,7 +48,6 @@ export default function Paragraph({
       {text.length >= 1 ? (
         textTo2D(text, width).map((textLine: string[], i: number) => {
           const location2d = locationTo2D(location, width);
-          console.log(location2d, width);
           let localLocation = -1;
           if (location2d.y === i) {
             localLocation = location2d.x;
