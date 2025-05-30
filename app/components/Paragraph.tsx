@@ -21,10 +21,6 @@ const renderTextLine = (
   });
 };
 
-// TODO: I need to define rules about how location is handled, right now it's all over the place, and that causes issues when rendering the current location
-// Underlying state is handled correctly, what needs fixing is how this underlying state is put into display
-//
-
 export default function Paragraph({
   text,
   location,
