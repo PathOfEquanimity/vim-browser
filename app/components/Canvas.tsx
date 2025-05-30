@@ -1,42 +1,44 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Mode, State, textTo2D, locationTo2D } from "@/lib/utils";
+import { Mode, State } from "@/lib/utils";
 import * as normal from "@/lib/normalMode";
 import * as insert from "@/lib/insertMode";
+import Paragraph from "@/components/Paragraph";
 
-// TODO: determine text size dyanmically
-const TEXT_SIZE = 30;
+export function createParagraphs(text: string, location: number) {
+  let paragraphSize = -1;
+  return text.split("\n").map((textLine: string, i: number) => {
+    console.log(paragraphSize, textLine.length, location);
+    paragraphSize += 1;
+    const lineSize = textLine.length;
+    const currentActiveLine =
+      location >= paragraphSize - 1 && location <= paragraphSize - 1 + lineSize;
 
-const renderTextLine = (
-  textLine: string[],
-  location: number,
-  lineNumber: number,
-) => {
-  return textLine.map((l: string, i: number) => {
+    let localLocation = -1;
+    if (currentActiveLine) {
+      localLocation = location - paragraphSize;
+    }
+
+    paragraphSize += lineSize;
     return (
-      <span
-        key={`${lineNumber}:${i}`}
-        className={location == i ? "bg-gray-500" : ""}
-        style={{ whiteSpace: "pre" }}
-      >
-        {l}
-      </span>
+      <Paragraph
+        key={i}
+        text={textLine}
+        location={localLocation}
+        currentActiveLine={currentActiveLine}
+      />
     );
   });
-};
+}
 
-export default function Canvas() {
+export function Canvas() {
   const [state, setState] = useState<State>({
     text: "",
     location: -1,
     mode: Mode.INSERT,
   });
-  const [width, setWidth] = useState(0);
 
-  useEffect(() => {
-    setWidth(Math.floor(window.innerWidth / TEXT_SIZE));
-  }, []);
   // TODO: to be removed
   const toggleMode = () => {
     setState({
@@ -48,11 +50,6 @@ export default function Canvas() {
   // NOTE: Any state set outside of the useEffect will only last until a keypress
   useEffect(() => {
     let localState = { ...state };
-
-    const handleResize = (event) => {
-      console.log(Math.floor(window.innerWidth / TEXT_SIZE));
-      setWidth(Math.floor(window.innerWidth / TEXT_SIZE));
-    };
 
     const handleKeyPress = (event: KeyboardEvent) => {
       const modeHandler = (): CallableFunction => {
@@ -71,27 +68,14 @@ export default function Canvas() {
     };
 
     document.addEventListener("keydown", handleKeyPress);
-    window.addEventListener("resize", handleResize);
   }, []);
 
   return (
-    <div className="gird">
+    <div className="grid">
       <div className="col-start-1 row-start-1">
-        {textTo2D(state.text, width).map((textLine: string[], i: number) => {
-          const location2d = locationTo2D(state.location, width);
-          console.log(location2d, width);
-          let localLocation = -1;
-          if (location2d.y === i) {
-            localLocation = location2d.x;
-          }
-          return (
-            <div key={i} className="col-start-1 row-start-1">
-              {renderTextLine(textLine, localLocation, i)}
-            </div>
-          );
-        })}
+        {createParagraphs(state.text, state.location)}
       </div>
-      <div className="col-start-1 row-start-1">
+      <div className="col-start-2 row-start-2">
         <button onClick={toggleMode}>
           {state.mode == Mode.INSERT ? "INSERT" : "NORMAL"}
         </button>
