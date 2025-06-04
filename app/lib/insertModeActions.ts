@@ -3,6 +3,12 @@ interface removalOperation {
   characterRemoved: string;
 }
 
-export function deleteCharacter(text: string): removalOperation {
-  return { newText: text.slice(0, -1), characterRemoved: text.slice(-1) };
+export function deleteCharacter(
+  text: string,
+  location: number,
+): removalOperation {
+  return {
+    newText: text.slice(0, location) + text.slice(location + 1),
+    characterRemoved: text[location],
+  };
 }

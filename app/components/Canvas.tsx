@@ -52,7 +52,7 @@ export function Canvas() {
 
     const handleKeyPress = (event: KeyboardEvent) => {
       const modeHandler = (): CallableFunction => {
-        switch (state.mode) {
+        switch (localState.mode) {
           case Mode.INSERT: {
             return insert.handle;
           }

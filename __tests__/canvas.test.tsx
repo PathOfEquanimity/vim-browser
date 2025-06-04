@@ -2,6 +2,7 @@ import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { createParagraphs } from "../app/components/Canvas";
 import Paragraph from "@/app/components/Paragraph";
+import { deleteCharacter } from "@/app/lib/insertModeActions";
 
 describe("paragraphs creation", () => {
   it("creates one paragraph when no new line", () => {
@@ -51,4 +52,18 @@ describe("paragraphs creation", () => {
 
     expect(paragraphs).toEqual(expectedParagraphs);
   });
+});
+
+describe("test insert mode", () => {
+  test.each([
+    ["hello", 0, "ello", "h"],
+    ["hello", 4, "hell", "o"],
+  ])(
+    "test character deletion",
+    (string, location, expectedString, expectedCharacterRemoved) => {
+      const { newText, characterRemoved } = deleteCharacter(string, location);
+      expect(newText).toEqual(expectedString);
+      expect(characterRemoved).toEqual(expectedCharacterRemoved);
+    },
+  );
 });
