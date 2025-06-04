@@ -20,10 +20,14 @@ export function handle(event: KeyboardEvent, state: State): State {
       break;
     }
     case "k": {
+      if (state.text[state.location] == "\n") {
+        newState.location = Math.max(state.location - 1, -1);
+        break;
+      }
       for (let i = state.location - 1; i >= 0; i--) {
         console.log(state, i);
         if (state.text[i] == "\n") {
-          newState.location = i - 1;
+          newState.location = Math.max(i - 1, -1);
           break;
         }
       }

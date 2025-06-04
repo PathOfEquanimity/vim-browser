@@ -47,6 +47,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 - [ ] Create summary of notes using AI
 - [ ] Add support for Visual Mode
+- [ ] Add support for markdown
 - [ ] Allow to yank and paste text to/from clipboard
 - [ ] Allow to UNDO changes, and REVERT changes
 - [ ] Allow j/k to navigate within paragraphs, or perhaps add a special mode that enables such naviation
@@ -54,6 +55,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ## TODO/BUGS:
 
 - [ ] For Insert mode display cursor, one ahead of the current location
-- [ ] Fix navigation from -1 to 0. Each naviation keystroke, should move the visible cursor
+- [ ] Fix navigation from -1 to 0. Each navigation keystroke, should move the visible cursor
 - [ ] When jumping from line to line
 - [ ] for h/l disallow to jump across lines
