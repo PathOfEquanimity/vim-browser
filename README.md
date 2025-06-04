@@ -34,3 +34,26 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Functional Requirements
+
+- [ ] Allow users to navigate in the text
+- [ ] Allow users to have two modes -- Normal and Insert
+- [ ] Support complex vim key strokes in normal Mode like `diw`
+- [ ] Allow to store created notes -- only for Authenticated users
+- [ ] Allow to see logged notes and pull up any of the written notes by date
+
+## Bonus Requirements
+
+- [ ] Create summary of notes using AI
+- [ ] Add support for Visual Mode
+- [ ] Allow to yank and paste text to/from clipboard
+- [ ] Allow to UNDO changes, and REVERT changes
+- [ ] Allow j/k to navigate within paragraphs, or perhaps add a special mode that enables such naviation
+
+## TODO/BUGS:
+
+- [ ] For Insert mode display cursor, one ahead of the current location
+- [ ] Fix navigation from -1 to 0. Each naviation keystroke, should move the visible cursor
+- [ ] When jumping from line to line
+- [ ] for h/l disallow to jump across lines
