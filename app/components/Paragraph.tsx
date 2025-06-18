@@ -7,12 +7,17 @@ const renderTextLine = (
   textLine: string[],
   location: number,
   lineNumber: number,
+  currentActiveLine: boolean,
 ) => {
   return textLine.map((l: string, i: number) => {
     return (
       <span
         key={`${lineNumber}:${i}`}
-        className={location == i ? "bg-gray-500" : ""}
+        className={
+          location == i || (i == 0 && location == -1 && currentActiveLine)
+            ? "bg-gray-500"
+            : ""
+        }
         style={{ whiteSpace: "pre" }}
       >
         {l}
@@ -54,7 +59,7 @@ export default function Paragraph({
           }
           return (
             <div key={i} className="col-start-1 row-start-1">
-              {renderTextLine(textLine, localLocation, i)}
+              {renderTextLine(textLine, localLocation, i, currentActiveLine)}
             </div>
           );
         })
